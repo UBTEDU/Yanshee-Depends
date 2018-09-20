@@ -302,7 +302,6 @@ libxml2-utils
 libxrandr-dev
 libxrender-dev
 libyelp0
-
 m4
 mercurial
 mercurial-common
@@ -392,3 +391,5 @@ xtrans-dev
 yelp
 yelp-xsl
 sqlite3
+
+libgtest-dev

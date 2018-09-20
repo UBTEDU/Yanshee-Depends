@@ -9,7 +9,7 @@ function pip_install() {
   local depends=`cat ${file_name}`
   for app in $depends; do
     echo "Updating $app"
-    sudo pip install $app
+    sudo pip2 install $app
   done
 }
 
@@ -33,6 +33,22 @@ function deb_install() {
   done
 }
 
+function check_patch() {
+  # Since the catkin_make depends catkin_pkg, the default catkin_pkg is 0.2.10-4,
+  # terminal_color cannot be found when catkin_make is called.
+  # More details, please refer to http://question3121.rssing.com/browser.php?indx=47150292&last=1&item=10
+  sudo apt -y purge catkin_pkg
+  sudo pip install --upgrade catkin_pkg_modules
+}
+
+function setup_gtest() {
+  # Setup the dev env for gtest
+  cd /usr/src/gtest
+  sudo cmake CMakeLists.txt
+  sudo make
+  sudo cp *.a /usr/lib
+}
+
 function main() {
   #statements
   sudo pip install --upgrade pip
@@ -41,6 +57,9 @@ function main() {
   pip_install $PIP_DEPENDS
   pip3_install $PIP3_DEPENDS
   deb_install $DEB_DEPENDS
+
+  # Setup the dev env
+  setup_gtest
 }
 
 main

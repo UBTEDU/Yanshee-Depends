@@ -1,0 +1,11 @@
+yanshee-depends (1.0.0-1ubuntu1) UNRELEASED; urgency=medium
+
+  * for test
+
+ -- Cygnus Yang <cygnus@work-ubuntu>  Wed, 19 Sep 2018 16:50:51 +0800
+
+yanshee-depends (1.0.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Cygnus Yang <cygnus@unknown>  Wed, 19 Sep 2018 16:12:14 +0800
