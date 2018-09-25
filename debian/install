@@ -1,0 +1,4 @@
+./check_depends usr/bin
+./pip_depends usr/bin
+./pip3_depends usr/bin
+./deb_depends usr/bin

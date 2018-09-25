@@ -302,7 +302,6 @@ libxml2-utils
 libxrandr-dev
 libxrender-dev
 libyelp0
-
 m4
 mercurial
 mercurial-common
@@ -397,3 +396,5 @@ sqlite3
 spyder
 spyder3
 epoptes-client
+sqlite3
+libgtest-dev
