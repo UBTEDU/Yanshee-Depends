@@ -1,4 +1,23 @@
+# Copyright (c) 2018 by UBTECH.
+# All Rights Reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #!/usr/bin/env bash
+
+source uv4l_setup
+
 PIP_DEPENDS="./pip_depends"
 PIP3_DEPENDS="./pip3_depends"
 DEB_DEPENDS="./deb_depends"
@@ -9,7 +28,7 @@ function pip_install() {
   local depends=`cat ${file_name}`
   for app in $depends; do
     echo "Updating $app"
-    sudo pip install $app
+    sudo pip2 install $app
   done
 }
 
@@ -33,14 +52,35 @@ function deb_install() {
   done
 }
 
+function check_patch() {
+  # Since the catkin_make depends catkin_pkg, the default catkin_pkg is 0.2.10-4,
+  # terminal_color cannot be found when catkin_make is called.
+  # More details, please refer to http://question3121.rssing.com/browser.php?indx=47150292&last=1&item=10
+  sudo apt -y purge catkin_pkg
+  sudo pip install --upgrade catkin_pkg_modules
+}
+
+function gtest_setup() {
+  # Setup the dev env for gtest
+  cd /usr/src/gtest
+  sudo cmake CMakeLists.txt
+  sudo make
+  sudo cp *.a /usr/lib
+}
+
 function main() {
   #statements
+  uv4l_setup
+
   sudo pip install --upgrade pip
   sudo pip3 install --upgrade pip
   sudo apt update
   pip_install $PIP_DEPENDS
   pip3_install $PIP3_DEPENDS
   deb_install $DEB_DEPENDS
+
+  # Setup the dev env
+  gtest_setup
 }
 
 main
