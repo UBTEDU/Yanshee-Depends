@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Copyright (c) 2018 by UBTECH.
 # All Rights Reserved.
 #
@@ -14,9 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#!/usr/bin/env bash
-
 source uv4l_setup
+source repo_setup
 
 PIP_DEPENDS="./pip_depends"
 PIP3_DEPENDS="./pip3_depends"
@@ -27,7 +27,7 @@ function pip_install() {
   local file_name=$1
   local depends=`cat ${file_name}`
   for app in $depends; do
-    echo "Updating $app"
+    echo "#####Updating $app"
     sudo pip2 install $app
   done
 }
@@ -37,7 +37,7 @@ function pip3_install() {
   local file_name=$1
   local depends=`cat ${file_name}`
   for app in $depends; do
-    echo "Updating $app"
+    echo "#####Updating $app"
     sudo pip3 install $app
   done
 }
@@ -47,7 +47,7 @@ function deb_install() {
   local file_name=$1
   local depends=`cat ${file_name}`
   for app in $depends; do
-    echo "Updating $app"
+    echo "#####Updating $app"
     sudo apt -y install $app
   done
 }
@@ -62,7 +62,7 @@ function check_patch() {
 
 function gtest_setup() {
   # Setup the dev env for gtest
-  cd /usr/src/gtest
+  cd /usr/src/gtest
   sudo cmake CMakeLists.txt
   sudo make
   sudo cp *.a /usr/lib
@@ -70,11 +70,9 @@ function gtest_setup() {
 
 function main() {
   #statements
+  repo_setup
   uv4l_setup
 
-  sudo pip install --upgrade pip
-  sudo pip3 install --upgrade pip
-  sudo apt update
   pip_install $PIP_DEPENDS
   pip3_install $PIP3_DEPENDS
   deb_install $DEB_DEPENDS

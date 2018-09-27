@@ -319,6 +319,7 @@ openmpi-bin
 openmpi-common
 partial
 po-debconf
+python-opencv
 python3-cairo
 python3-gi-cairo
 python-bzrlib
@@ -390,8 +391,12 @@ xterm
 xtrans-dev
 yelp
 yelp-xsl
+scim-pinyin
 sqlite3
-
+spyder
+spyder3
+epoptes-client
+sqlite3
 libgtest-dev
 
 uv4l
