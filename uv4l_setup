@@ -18,7 +18,6 @@
 
 
 
-
 function uv4l_setup() {
   # Install the packages for uv4l
   local uv4l_isinstalled=`grep uv4l_repo /etc/apt/sources.list -rn | wc -l`
