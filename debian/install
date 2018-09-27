@@ -2,3 +2,5 @@
 ./pip_depends usr/bin
 ./pip3_depends usr/bin
 ./deb_depends usr/bin
+./uv4l_setup usr/bin
+./repo_setup usr/bin
